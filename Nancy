@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nacia Beauty Salon</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body{font-family:Poppins;margin:0;background:#fff;color:#333}
+nav{background:#000;color:#fff;padding:15px;display:flex;justify-content:space-between}
+nav a{color:#fff;margin-left:15px;text-decoration:none}
+.hero{
+height:75vh;
+background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
+url('https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg');
+background-size:cover;color:#fff;
+display:flex;align-items:center;justify-content:center;text-align:center}
+section{padding:50px 8%}
+.title{text-align:center;font-size:26px;margin-bottom:25px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.card{border:1px solid #eee;padding:20px;border-radius:8px;text-align:center}
+.btn{background:#f4b400;color:#000;padding:12px 25px;border-radius:5px;text-decoration:none}
+.review{border:1px solid #eee;padding:10px;margin:10px 0;border-radius:8px}
+footer{background:#000;color:#fff;text-align:center;padding:20px}
+</style>
+</head>
+
+<body>
+
+<nav>
+<b>Nacia Beauty Salon</b>
+<div>
+<a href="#services">Services</a>
+<a href="#prices">Prices</a>
+<a href="#booking">Booking</a>
+<a href="#reviews">Reviews</a>
+<a href="#contact">Contact</a>
+</div>
+</nav>
+
+<div class="hero">
+<div>
+<h1>Professional Hair & Makeup</h1>
+<p>Enhancing Your Natural Beauty</p>
+<a href="#booking" class="btn">Book Now</a>
+</div>
+</div>
+
+<section id="services">
+<h2 class="title">Our Services</h2>
+<div class="grid">
+<div class="card">Professional Makeup</div>
+<div class="card">Hair & Wig Services</div>
+<div class="card">Lash Extensions</div>
+<div class="card">Nail Services</div>
+<div class="card">Brows Lamination</div>
+</div>
+</section>
+
+<section id="prices">
+<h2 class="title">Price List</h2>
+<div class="grid">
+<div class="card">Bridal Makeup ¥500</div>
+<div class="card">Party Makeup ¥300</div>
+<div class="card">Hair Styling ¥200</div>
+<div class="card">Wig Install ¥400</div>
+<div class="card">Classic Lashes ¥150</div>
+<div class="card">Manicure ¥120</div>
+</div>
+</section>
+
+<section id="booking">
+<h2 class="title">Real Booking Calendar</h2>
+<p style="text-align:center">Choose your date & time below.</p>
+
+<iframe
+src="https://calendly.com/YOUR-LINK"
+width="100%" height="700" frameborder="0">
+</iframe>
+
+<p style="text-align:center">
+You will receive confirmation after booking.
+</p>
+</section>
+
+<section id="reviews">
+<h2 class="title">Customer Reviews</h2>
+<div id="reviewList"></div>
+
+<input id="name" placeholder="Your Name">
+<textarea id="msg" placeholder="Your Review"></textarea>
+<br>
+<button class="btn" onclick="addReview()">Submit</button>
+</section>
+
+<section id="contact">
+<h2 class="title">Our Location</h2>
+<iframe src="https://maps.google.com/maps?q=佛山市南海区京华广场2&z=15&output=embed"
+width="100%" height="350"></iframe>
+
+<p style="text-align:center">
+📞 +86 158 1057 1370 / +86 178 1978 8168<br>
+🕒 Monday–Saturday 9AM–10PM<br>
+📸 Instagram: https://www.instagram.com/nacia__beauty.co
+</p>
+</section>
+
+<footer>
+© 2026 Nacia Beauty Salon
+</footer>
+
+<script>
+function addReview(){
+let name=document.getElementById("name").value;
+let msg=document.getElementById("msg").value;
+if(name && msg){
+let r=JSON.parse(localStorage.getItem("reviews")||"[]");
+r.push({name,msg});
+localStorage.setItem("reviews",JSON.stringify(r));
+show();
+}
+}
+function show(){
+let r=JSON.parse(localStorage.getItem("reviews")||"[]");
+let html="";
+r.forEach(x=>html+=`<div class="review"><b>${x.name}</b><br>${x.msg}</div>`);
+document.getElementById("reviewList").innerHTML=html;
+}
+show();
+</script>
+
+</body>
+</html>
